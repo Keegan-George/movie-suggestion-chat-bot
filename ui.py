@@ -19,13 +19,14 @@ class Window(QWidget):
 
         # widgets
         self.chat = QTextEdit(self)
+        self.chat.setReadOnly(True)
         self.input = QLineEdit(self)
         self.submit_button = QPushButton("Submit", self)
         self.submit_button.clicked.connect(self.submit)
 
+        # layout
         layout = QGridLayout()
         self.setLayout(layout)
-
         layout.addWidget(self.chat, 0, 0, 1, 2)
         layout.addWidget(self.input, 1, 0)
         layout.addWidget(self.submit_button, 1, 1)
