@@ -86,7 +86,9 @@ def run_chatbot():
 
         else:
             films = get_films(user_input)
-            print(films if films else "Sorry, I didn't get that. Can you try again.")
+            print(
+                films if films else "Bot: Sorry, I didn't get that. Can you try again."
+            )
 
 
 run_chatbot()
