@@ -38,7 +38,10 @@ class Window(QWidget):
         Display the user inputted text in the chat window.
         """
         text = self.input.text()
-        self.chat.append(text)
+
+        if text:
+            self.chat.append(text)
+            self.input.clear()
 
 
 app = QApplication(sys.argv)
