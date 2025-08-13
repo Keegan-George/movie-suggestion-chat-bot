@@ -31,6 +31,9 @@ TMDB_GENRE_IDS = {
 
 
 def get_films(genres: str) -> list[str]:
+    """
+    Retrieves a list of movies by genre."
+    """
     genre_list = genres.split()
     genre_ids = [
         str(TMDB_GENRE_IDS[genre]) for genre in genre_list if genre in TMDB_GENRE_IDS
