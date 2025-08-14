@@ -2,37 +2,41 @@ from nltk.chat.util import Chat, reflections
 from films import get_films
 
 
-pairs = [
-    (r"Hello|Hi|Hey", ("Hi! How can I help you today?",)),
-    (
-        r"Who are you?|What's your name?",
-        ("I'm the movie recommendation bot. I'll recommend movies based on genre.",),
-    ),
-]
+class Chatbot:
+    def __init__(self):
+        self.pairs = [
+            (r"Hello|Hi|Hey", ("Hi! How can I help you today?",)),
+            (
+                r"Who are you?|What's your name?",
+                (
+                    "I'm the movie recommendation bot. I'll recommend movies based on genre.",
+                ),
+            ),
+        ]
 
+        self.chatbot = Chat(self.pairs, reflections)
 
-chatbot = Chat(pairs, reflections)
+    def run_chatbot(self):
+        """
+        Type 'quit' to exit.
 
+        """
+        while True:
+            user_input = input("User: ")
 
-def run_chatbot():
-    """
-    Type 'quit' to exit.
+            if user_input == "quit":
+                print("Bot: Goodbye")
+                break
 
-    """
-    while True:
-        user_input = input("User: ")
+            response = self.chatbot.respond(user_input)
 
-        if user_input == "exit":
-            print("Bot: Goodbye")
-            break
+            if response:
+                print(response)
 
-        response = chatbot.respond(user_input)
-
-        if response:
-            print(response)
-
-        else:
-            films = get_films(user_input)
-            print(
-                films if films else "Bot: Sorry, I didn't get that. Can you try again."
-            )
+            else:
+                films = get_films(user_input)
+                print(
+                    films
+                    if films
+                    else "Bot: Sorry, I didn't get that. Please try again."
+                )
