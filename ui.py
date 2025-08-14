@@ -1,5 +1,4 @@
 from PyQt6.QtWidgets import (
-    QApplication,
     QGridLayout,
     QWidget,
     QTextEdit,
@@ -8,7 +7,6 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
-import sys
 
 
 class Window(QWidget):
@@ -42,9 +40,3 @@ class Window(QWidget):
         if text:
             self.chat.append(text)
             self.input.clear()
-
-
-app = QApplication(sys.argv)
-window = Window()
-window.show()
-sys.exit(app.exec())
