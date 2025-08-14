@@ -5,7 +5,7 @@ from films import get_films
 class Chatbot:
     def __init__(self):
         self.pairs = [
-            (r"Hello|Hi|Hey", ("Hi! How can I help you today?",)),
+            (r"Hello|Hi|Hey", ("Hi! How can I help you?",)),
             (
                 r"Who are you?|What's your name?",
                 (
@@ -16,27 +16,22 @@ class Chatbot:
 
         self.chatbot = Chat(self.pairs, reflections)
 
-    def run_chatbot(self):
+    def get_response(self, user_input):
         """
-        Type 'quit' to exit.
-
+        Generates the chatbot responses.
         """
-        while True:
-            user_input = input("User: ")
+        user_input = input("User: ")
 
-            if user_input == "quit":
-                print("Bot: Goodbye")
-                break
+        if user_input == "quit":
+            return "Bot: Goodbye."
 
-            response = self.chatbot.respond(user_input)
+        response = self.chatbot.respond(user_input)
 
-            if response:
-                print(response)
+        if response:
+            return response
 
-            else:
-                films = get_films(user_input)
-                print(
-                    films
-                    if films
-                    else "Bot: Sorry, I didn't get that. Please try again."
-                )
+        else:
+            films = get_films(user_input)
+            return (
+                films if films else "Bot: Sorry, I didn't get that. Please try again."
+            )
