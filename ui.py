@@ -5,8 +5,6 @@ from PyQt6.QtWidgets import (
     QLineEdit,
     QPushButton,
 )
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
 
 
 class Window(QWidget):
