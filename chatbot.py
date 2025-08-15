@@ -16,7 +16,7 @@ class Chatbot:
 
         self.chatbot = Chat(self.pairs, reflections)
 
-    def get_response(self, user_input):
+    def get_bot_response(self, user_input):
         """
         Generates the chatbot responses.
         """
