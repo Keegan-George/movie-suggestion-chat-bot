@@ -10,8 +10,9 @@ class App:
         self.window = Window()
         self.chatbot = Chatbot()
 
-        # event
+        # events
         self.window.submit_button.clicked.connect(self.chat)
+        self.window.input.returnPressed.connect(self.chat)
 
     def chat(self):
         """
