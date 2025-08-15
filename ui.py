@@ -17,6 +17,7 @@ class Window(QWidget):
         self.chat = QTextEdit(self)
         self.chat.setReadOnly(True)
         self.input = QLineEdit(self)
+        self.input.setFocus()
         self.submit_button = QPushButton("Submit", self)
 
         # layout
