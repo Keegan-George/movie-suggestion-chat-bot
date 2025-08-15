@@ -20,7 +20,7 @@ class App:
         """
         text = self.window.input.text()
 
-        if text == "quit":
+        if text.lower() in ("quit", "exit"):
             self.app.quit()
 
         if text:
