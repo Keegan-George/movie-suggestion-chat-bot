@@ -21,9 +21,6 @@ class Chatbot:
         Generates the chatbot responses.
         """
 
-        if user_input == "quit":
-            return "Bot: Goodbye."
-
         response = self.chatbot.respond(user_input)
 
         if response:

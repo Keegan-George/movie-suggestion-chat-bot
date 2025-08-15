@@ -20,13 +20,16 @@ class App:
         """
         text = self.window.input.text()
 
+        if text == "quit":
+            self.app.quit()
+
         if text:
             self.window.display(text)
             self.window.input.clear()
 
-        chatbot_response = self.chatbot.get_bot_response(text)
+            chatbot_response = self.chatbot.get_bot_response(text)
 
-        self.window.display(chatbot_response)
+            self.window.display(chatbot_response)
 
     def start(self):
         self.window.show()
