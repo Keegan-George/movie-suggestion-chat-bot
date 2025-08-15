@@ -1,4 +1,4 @@
-from chatbot import run_chatbot
+from app import App
 
-
-run_chatbot()
+app = App()
+app.start()
