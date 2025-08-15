@@ -50,8 +50,13 @@ def get_films(genres: str) -> list[str]:
 
         films = response.json()["results"]
 
-        film_list = [(film["title"], film["release_date"]) for film in films]
+        film_list = [
+            f"{index}. {film['title']}, {film['release_date']}"
+            for index, film in enumerate(films, start=1)
+        ]
 
-        return film_list
+        films_string = "\n".join(film_list)
+
+        return films_string
 
     return None
