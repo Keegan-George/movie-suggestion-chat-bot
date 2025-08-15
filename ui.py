@@ -19,9 +19,6 @@ class Window(QWidget):
         self.input = QLineEdit(self)
         self.submit_button = QPushButton("Submit", self)
 
-        # event
-        self.submit_button.clicked.connect(self.submit)
-
         # layout
         layout = QGridLayout()
         self.setLayout(layout)
@@ -29,12 +26,8 @@ class Window(QWidget):
         layout.addWidget(self.input, 1, 0)
         layout.addWidget(self.submit_button, 1, 1)
 
-    def submit(self):
+    def display(self, text):
         """
-        Display the user inputted text in the chat window.
+        Display text in the chat window.
         """
-        text = self.input.text()
-
-        if text:
-            self.chat.append(text)
-            self.input.clear()
+        self.chat.append(text)
