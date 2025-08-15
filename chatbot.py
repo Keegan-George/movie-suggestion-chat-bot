@@ -20,7 +20,6 @@ class Chatbot:
         """
         Generates the chatbot responses.
         """
-        user_input = input("User: ")
 
         if user_input == "quit":
             return "Bot: Goodbye."

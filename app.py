@@ -23,7 +23,7 @@ class App:
             self.window.display(text)
             self.window.input.clear()
 
-        chatbot_response = self.chatbot(text)
+        chatbot_response = self.chatbot.get_bot_response(text)
 
         self.window.display(chatbot_response)
 
