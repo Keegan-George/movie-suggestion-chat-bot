@@ -3,7 +3,7 @@ from films import get_films
 
 
 class Chatbot:
-    def __init__(self):
+    def __init__(self) -> None:
         self.pairs = [
             (r"Hello|Hi|Hey", ("Hi! How can I help you?",)),
             (
@@ -16,7 +16,7 @@ class Chatbot:
 
         self.chatbot = Chat(self.pairs, reflections)
 
-    def get_bot_response(self, user_input):
+    def get_bot_response(self, user_input: str) -> str:
         """
         Generates the chatbot responses.
         """

@@ -5,7 +5,7 @@ from chatbot import Chatbot
 
 
 class App:
-    def __init__(self):
+    def __init__(self) -> None:
         self.app = QApplication(sys.argv)
         self.window = Window()
         self.chatbot = Chatbot()
@@ -14,7 +14,7 @@ class App:
         self.window.submit_button.clicked.connect(self.chat)
         self.window.input.returnPressed.connect(self.chat)
 
-    def chat(self):
+    def chat(self) -> None:
         """
         Submits question to the chatbot.
         """
@@ -31,6 +31,6 @@ class App:
 
             self.window.display(chatbot_response)
 
-    def start(self):
+    def start(self) -> None:
         self.window.show()
         sys.exit(self.app.exec())

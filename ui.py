@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
 
 
 class Window(QWidget):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.resize(400, 500)
         self.setWindowTitle("Movie Suggestion Chat Bot")
@@ -27,7 +27,7 @@ class Window(QWidget):
         layout.addWidget(self.input, 1, 0)
         layout.addWidget(self.submit_button, 1, 1)
 
-    def display(self, text):
+    def display(self, text) -> None:
         """
         Display text in the chat window.
         """

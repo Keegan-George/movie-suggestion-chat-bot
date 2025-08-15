@@ -30,7 +30,7 @@ TMDB_GENRE_IDS = {
 }
 
 
-def get_films(genres: str) -> list[str]:
+def get_films(genres: str) -> str:
     """
     Retrieves a list of movies by genre."
     """
