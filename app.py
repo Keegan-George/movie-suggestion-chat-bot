@@ -14,6 +14,11 @@ class App:
         self.window.submit_button.clicked.connect(self.chat)
         self.window.input.returnPressed.connect(self.chat)
 
+        # apply stylesheet
+        with open("style.qss", "r") as qss_file:
+            _style = qss_file.read()
+            self.app.setStyleSheet(_style)
+
     def chat(self) -> None:
         """
         Submits question to the chatbot.

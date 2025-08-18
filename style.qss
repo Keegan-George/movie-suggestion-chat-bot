@@ -1,0 +1,25 @@
+QLineEdit{
+    background-color: #D3D3D3;
+    border: 1px solid #D3D3D3;
+    border-radius: 4px;
+    padding: 4px;
+    color: black;
+}
+
+QPushButton{
+    background-color: #B0E0E6;
+    border: 1px solid #D3D3D3;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QPushButton:pressed {
+    background-color: #A0C0C0;
+    padding-left: 6px;
+    padding-top: 6px;
+}
+
+QTextEdit{
+    background-color: #B0E0E6;
+    border-radius: 4px;
+}
