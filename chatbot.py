@@ -29,5 +29,5 @@ class Chatbot:
         else:
             films = get_films(user_input)
             return (
-                films if films else "Bot: Sorry, I didn't get that. Please try again."
+                films if films else "Sorry, I didn't get that. Please try again."
             )
