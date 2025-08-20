@@ -7,6 +7,10 @@ from PyQt6.QtWidgets import (
 )
 
 
+from PyQt6.QtGui import QTextCursor, QTextBlockFormat
+from PyQt6.QtCore import Qt
+
+
 class Window(QWidget):
     def __init__(self) -> None:
         super().__init__()
@@ -27,8 +31,20 @@ class Window(QWidget):
         layout.addWidget(self.input, 1, 0)
         layout.addWidget(self.submit_button, 1, 1)
 
-    def display(self, text) -> None:
+    def display(self, text: str, sender: str) -> None:
         """
         Display text in the chat window.
         """
+        cursor = self.chat.textCursor()
+
+        block_format = QTextBlockFormat()
+
+        if sender == "user":
+            block_format.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        elif sender == "chatbot":
+            block_format.setAlignment(Qt.AlignmentFlag.AlignRight)
+
+        cursor.insertBlock(block_format)
+
         self.chat.append(text)

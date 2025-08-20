@@ -29,12 +29,12 @@ class App:
             self.app.quit()
 
         if text:
-            self.window.display(text)
+            self.window.display(text, "user")
             self.window.input.clear()
 
             chatbot_response = self.chatbot.get_bot_response(text)
 
-            self.window.display(chatbot_response)
+            self.window.display(chatbot_response, "chatbot")
 
     def start(self) -> None:
         self.window.show()
