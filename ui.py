@@ -7,10 +7,6 @@ from PyQt6.QtWidgets import (
 )
 
 
-from PyQt6.QtGui import QTextCursor, QTextBlockFormat
-from PyQt6.QtCore import Qt
-
-
 class Window(QWidget):
     def __init__(self) -> None:
         super().__init__()
@@ -20,6 +16,7 @@ class Window(QWidget):
         # widgets
         self.chat = QTextEdit(self)
         self.chat.setReadOnly(True)
+        self.chat.setAcceptRichText(True)
         self.input = QLineEdit(self)
         self.input.setFocus()
         self.submit_button = QPushButton("Submit", self)
@@ -35,16 +32,24 @@ class Window(QWidget):
         """
         Display text in the chat window.
         """
-        cursor = self.chat.textCursor()
 
-        block_format = QTextBlockFormat()
+        chat_bubble = f"""
+            <table width="100%" cellspacing="0" cellpadding="4">
+                <tr>
+                    {'<td width="60%">' if sender == 'user' else '<td width="40%"></td><td width="60%">'}
+                        <div style="
+                            background-color:{'#FFD580' if sender == 'user' else '#C1E1C1'};
+                            border-radius: 12px;
+                            font-size: 12px;
+                            padding: 4px;
+                            color: black;
+                            font-family: Courier;
+                        ">
+                            {text}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        """
 
-        if sender == "user":
-            block_format.setAlignment(Qt.AlignmentFlag.AlignLeft)
-
-        elif sender == "chatbot":
-            block_format.setAlignment(Qt.AlignmentFlag.AlignRight)
-
-        cursor.insertBlock(block_format)
-
-        self.chat.append(text)
+        self.chat.insertHtml(chat_bubble)
