@@ -5,9 +5,9 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QListWidget,
     QListWidgetItem,
+    QLabel,
+    QHBoxLayout,
 )
-
-from PyQt6.QtCore import Qt
 
 
 class Window(QWidget):
@@ -34,12 +34,30 @@ class Window(QWidget):
         Display text in the chat window.
         """
 
-        chat_bubble = QListWidgetItem(text)
+        # label to serve as the chat bubble
+        chat_bubble = QLabel(text)
+        chat_bubble.setWordWrap(True)
 
+        # create a layout for the bubble
+        bubble_layout = QHBoxLayout()
+
+        # add bubble to layout and position left/right accordingly
         if sender == "user":
-            chat_bubble.setTextAlignment(Qt.AlignmentFlag.AlignLeft)
+            bubble_layout.addWidget(chat_bubble)
+            bubble_layout.addStretch()
+            chat_bubble.setObjectName("userBubble")
 
         elif sender == "chatbot":
-            chat_bubble.setTextAlignment(Qt.AlignmentFlag.AlignRight)
+            bubble_layout.addStretch()
+            bubble_layout.addWidget(chat_bubble)
+            chat_bubble.setObjectName("chatbotBubble")
 
-        self.chat.addItem(chat_bubble)
+        # create a container and apply layout
+        bubble_container = QWidget()
+        bubble_container.setLayout(bubble_layout)
+
+        # add to list and set to container
+        item = QListWidgetItem()
+        item.setSizeHint(bubble_container.sizeHint())
+        self.chat.addItem(item)
+        self.chat.setItemWidget(item, bubble_container)
