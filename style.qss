@@ -19,7 +19,7 @@ QPushButton:pressed {
     padding-top: 6px;
 }
 
-QTextEdit{
+QListWidget{
     background-color: #B0E0E6;
     border-radius: 4px;
 }
