@@ -1,3 +1,4 @@
+import string
 import requests
 from os import getenv
 from dotenv import load_dotenv
@@ -30,11 +31,13 @@ TMDB_GENRE_IDS = {
 }
 
 
-def get_films(genres: str) -> str:
+def get_films(phrase: str) -> str:
     """
     Retrieves a list of movies by genre."
     """
-    genre_list = genres.lower().split()
+
+    cleaned_phrase = phrase.translate(str.maketrans("", "", string.punctuation))
+    genre_list = cleaned_phrase.lower().split()
     genre_ids = [
         str(TMDB_GENRE_IDS[genre]) for genre in genre_list if genre in TMDB_GENRE_IDS
     ]
