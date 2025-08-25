@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+TMDB_URL = getenv("TMDB_URL")
+TMDB_API_KEY = getenv("TMDB_API_KEY")
 
 TMDB_GENRE_IDS = {
     "action": 28,
@@ -33,23 +35,21 @@ TMDB_GENRE_IDS = {
 
 def get_films(phrase: str) -> str:
     """
-    Retrieves a list of movies by genre."
+    Extract movie genres from a phrase and return a list of recommended films using the TMDB API.
+    Return None if no valid genres are found
     """
+    # extract TMDB genre IDs
+    genre_ids = extract_genre_ids(phrase)
 
-    cleaned_phrase = phrase.translate(str.maketrans("", "", string.punctuation))
-    genre_list = cleaned_phrase.lower().split()
-    genre_ids = [
-        str(TMDB_GENRE_IDS[genre]) for genre in genre_list if genre in TMDB_GENRE_IDS
-    ]
-
+    # return list of films from TMBD API
     if genre_ids:
         PARAMS = {
-            "api_key": getenv("TMDB_API_KEY"),
+            "api_key": TMDB_API_KEY,
             "with_genres": ",".join(genre_ids),
             "sort_by": "vote_count.desc",
         }
 
-        response = requests.get(url=f"{getenv('TMDB_URL')}", params=PARAMS)
+        response = requests.get(url=TMDB_URL, params=PARAMS)
 
         films = response.json()["results"]
 
@@ -63,3 +63,12 @@ def get_films(phrase: str) -> str:
         return films_string
 
     return None
+
+
+def extract_genre_ids(phrase: str) -> list[str]:
+    """
+    Extract TMBD genre IDs from a phrase.
+    """
+    cleaned_phrase = phrase.translate(str.maketrans("", "", string.punctuation))
+    words = cleaned_phrase.lower().split()
+    return [str(TMDB_GENRE_IDS[genre]) for genre in words if genre in TMDB_GENRE_IDS]
