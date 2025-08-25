@@ -9,6 +9,9 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
 )
 
+USER = "user"
+BOT = "chatbot"
+
 
 class Window(QWidget):
     def __init__(self) -> None:
@@ -20,6 +23,7 @@ class Window(QWidget):
         self.chat = QListWidget(self)
         self.input = QLineEdit(self)
         self.input.setFocus()
+        self.input.setPlaceholderText("Type your message here...")
         self.submit_button = QPushButton("Submit", self)
 
         # layout
@@ -31,33 +35,47 @@ class Window(QWidget):
 
     def display(self, text: str, sender: str) -> None:
         """
-        Display text in the chat window.
+        Display a chat bubble in the chat window aligned (left or right),
+        based on the sender (user or chatbot accordingly).
         """
+        # create chat bubble
+        chat_bubble = self._create_chat_bubble(text, sender)
 
-        # label to serve as the chat bubble
-        chat_bubble = QLabel(text)
-        chat_bubble.setWordWrap(True)
-
-        # create a layout for the bubble
-        bubble_layout = QHBoxLayout()
-
-        # add bubble to layout and position left/right accordingly
-        if sender == "user":
-            bubble_layout.addWidget(chat_bubble)
-            bubble_layout.addStretch()
-            chat_bubble.setObjectName("userBubble")
-
-        elif sender == "chatbot":
-            bubble_layout.addStretch()
-            bubble_layout.addWidget(chat_bubble)
-            chat_bubble.setObjectName("chatbotBubble")
-
-        # create a container and apply layout
-        bubble_container = QWidget()
-        bubble_container.setLayout(bubble_layout)
-
-        # add to list and set to container
+        # create list widget item and set height
         item = QListWidgetItem()
-        item.setSizeHint(bubble_container.sizeHint())
+        item.setSizeHint(chat_bubble.sizeHint())
+
+        # add list widget item and set to chat bubble
         self.chat.addItem(item)
-        self.chat.setItemWidget(item, bubble_container)
+        self.chat.setItemWidget(item, chat_bubble)
+
+        # scroll chat window to the bottom
+        self.chat.scrollToBottom()
+
+    def _create_chat_bubble(self, text: str, sender: str):
+        """
+        Create a chat bubble aligned (left or right) based on the sender (user or chatbot accordingly).
+        """
+        # label acts as the chat bubble
+        label = QLabel(text)
+        label.setWordWrap(True)
+
+        # create horizontal layout for the chat bubble
+        layout = QHBoxLayout()
+
+        # add label to layout and position left or right
+        if sender == USER:
+            layout.addWidget(label)
+            layout.addStretch()
+            label.setObjectName("userBubble")
+
+        elif sender == BOT:
+            layout.addStretch()
+            layout.addWidget(label)
+            label.setObjectName("chatbotBubble")
+
+        # create a container for the bubble and set layout
+        container = QWidget()
+        container.setLayout(layout)
+
+        return container
