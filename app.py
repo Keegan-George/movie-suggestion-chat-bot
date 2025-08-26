@@ -13,7 +13,7 @@ class App:
         self.window = Window()
         self.chatbot = Chatbot()
 
-        # events
+        # event bindings
         self.window.submit_button.clicked.connect(self.chat)
         self.window.input.returnPressed.connect(self.chat)
 
@@ -23,7 +23,7 @@ class App:
     def chat(self) -> None:
         """
         Handles user input from the GUI.
-        Terminates the app if any of the exit commands is entered.
+        Terminates the app if any exit command is entered.
         """
         text = self.window.input.text().strip()
 
@@ -33,11 +33,12 @@ class App:
         if text.lower() in EXIT_COMMANDS:
             self.app.quit()
 
+        # display user text
         self.window.display(text, "user")
         self.window.input.clear()
 
+        # display chatbot response
         chatbot_response = self.chatbot.get_bot_response(text)
-
         self.window.display(chatbot_response, "chatbot")
 
     def start(self) -> None:
@@ -55,4 +56,4 @@ class App:
             with open(path, "r") as qss_file:
                 self.app.setStyleSheet(qss_file.read())
         except FileNotFoundError:
-            print(f"{path} not found.")
+            print(f"Stylesheet '{path}' not found.")
