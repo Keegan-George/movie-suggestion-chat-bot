@@ -22,7 +22,6 @@ class Window(QWidget):
         # widgets
         self.chat = QListWidget(self)
         self.input = QLineEdit(self)
-        self.input.setFocus()
         self.input.setPlaceholderText("Type your message here...")
         self.submit_button = QPushButton("Submit", self)
 
@@ -35,8 +34,7 @@ class Window(QWidget):
 
     def display(self, text: str, sender: str) -> None:
         """
-        Display a chat bubble in the chat window aligned (left or right),
-        based on the sender (user or chatbot accordingly).
+        Display a chat bubble in the chat window aligned by sender.
         """
         # create chat bubble
         chat_bubble = self._create_chat_bubble(text, sender)
