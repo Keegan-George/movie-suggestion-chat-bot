@@ -36,7 +36,7 @@ TMDB_GENRE_IDS = {
 def get_films(phrase: str) -> str:
     """
     Extract movie genres from a phrase and return a list of recommended films using the TMDB API.
-    Return None if no valid genres are found
+    Return None if no valid genres are found.
     """
     # extract TMDB genre IDs
     genre_ids = extract_genre_ids(phrase)
